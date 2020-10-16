@@ -10,4 +10,10 @@ module "vpc" {
   private_cidrs = ["10.1.2.0/24", "10.1.4.0/24"]
 }
 
+module "alb" {
+  source         = "./alb"
+  vpc_id         = module.vpc.vpc_id
+  public_subnets = module.vpc.public_subnets
+}
+
 
