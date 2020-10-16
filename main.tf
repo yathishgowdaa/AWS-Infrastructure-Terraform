@@ -16,4 +16,9 @@ module "alb" {
   public_subnets = module.vpc.public_subnets
 }
 
-
+module "auto_scaling" {
+  source               = "./auto_scaling"
+  vpc_id               = module.vpc.vpc_id
+  private_subnets      = module.vpc.private_subnets
+  alb_target_group_arn = module.alb.alb_target_group_arn
+}
