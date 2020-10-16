@@ -22,3 +22,12 @@ module "auto_scaling" {
   private_subnets      = module.vpc.private_subnets
   alb_target_group_arn = module.alb.alb_target_group_arn
 }
+
+
+module "rds" {
+  source             = "./rds"
+  db_instance        = "db.t2.micro"
+  private_subnets    = module.vpc.private_subnets
+  vpc_id             = module.vpc.vpc_id
+  asg_security_group = module.auto_scaling.asg_security_group
+}
